@@ -1,13 +1,17 @@
 # Efficience
 
 ## Lancement du projet
-Pour lancer le projet, merci de suivre ces commandes :
+Pour lancer le projet, merci de suivre la commande :
 
-`make install` -> fera un composer install
+`make start`
 
-`make up` -> lancera les conteneurs Docker (nginx, php, mailhog)
+Lors du input `docker-compose exec php bin/console doctrine:migrations:migrate` 
+-> faire entrer
 
-`make fixture` -> peuplera la table "Department" via le fichier de fixture src/DataFixtures/AppFixtures
+
+Lors du input `docker-compose exec bin/console doctrine:fixtures:load`
+-> taper yes
+
 
 ## Accessibilité
 
