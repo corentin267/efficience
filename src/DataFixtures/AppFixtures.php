@@ -7,6 +7,7 @@ namespace App\DataFixtures;
 use App\Entity\Department;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Faker;
 
 /**
  * Class AppFixtures
@@ -16,30 +17,14 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $data = [
-            [
-                'department' => 'rh',
-                'mailResponsable' => 'gmonti@efficience.it'
-            ],
-            [
-                'department' => 'direction',
-                'mailResponsable' => 'arobert@efficience.it'
-            ],
-            [
-                'department' => 'communication',
-                'mailResponsable' => 'blefebvre@efficience.it'
-            ],
-            [
-                'department' => 'développement',
-                'mailResponsable' => 'alemoine@efficience.it'
-            ]
-        ];
+
+        $faker = Faker\Factory::create('fr_FR');
 
         // Add Department fixture
-        for ($i = 0; $i < sizeof($data); $i++) {
+        for ($i = 0; $i < 4; $i++) {
             $dep = new Department();
-            $dep->setLabel($data[$i]['department']);
-            $dep->setMailResponsable($data[$i]['mailResponsable']);
+            $dep->setLabel($faker->company);
+            $dep->setMailResponsable($faker->companyEmail);
             $manager->persist($dep);
         }
 

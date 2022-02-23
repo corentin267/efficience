@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Repository\DepartmentRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Config\TwigExtra\StringConfig;
@@ -47,10 +48,9 @@ class ContactForm
     private string $message;
 
     /**
-     * @Assert\NotBlank
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="contacts")
      */
-    private string $department;
+    private ?Department $department;
 
     /**
      * @return string
@@ -125,21 +125,19 @@ class ContactForm
     }
 
     /**
-     * @return string
+     * @return Department|null
      */
-    public function getDepartment(): string
+    public function getDepartment(): ?Department
     {
         return $this->department;
     }
 
     /**
-     * @param string $department
-     * @return ContactForm
+     * @param Department|null $department
      */
-    public function setDepartment(string $department): ContactForm
+    public function setDepartment(?Department $department): void
     {
         $this->department = $department;
-        return $this;
     }
 
     /**
